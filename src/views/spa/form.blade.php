@@ -33,7 +33,8 @@
         'routesConfigFile'  => 'spas',
         'objectId'          => isset($object)? $object->id_180 : null])
     @include('pulsar::includes.js.check_slug', [
-        'route' => 'apiCheckSlugHotel'
+        'route' => 'apiCheckSlugHotel',
+        'lang'  => null
     ])
 
     <script>
