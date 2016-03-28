@@ -1,4 +1,4 @@
-<?php namespace Syscover\Hotels;
+<?php namespace Syscover\Spas;
 
 use Illuminate\Support\ServiceProvider;
 
