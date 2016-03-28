@@ -28,7 +28,7 @@ class SpasServiceProvider extends ServiceProvider
 
         // register config files
         $this->publishes([
-            __DIR__ . '/../../config/hotels.php' 			=> config_path('spas.php')
+            __DIR__ . '/../../config/spas.php' 				=> config_path('spas.php')
         ]);
 
         // register migrations
