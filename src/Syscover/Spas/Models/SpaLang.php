@@ -7,12 +7,12 @@ use Sofa\Eloquence\Eloquence;
 use Sofa\Eloquence\Mappable;
 
 /**
- * Class HotelLang
+ * Class SpaLang
  *
  * Model with properties
- * <br><b>[id, lang, cuisine, special_dish, indications, interest_points, environment_description, construction, activities, description_title, description, data_181]</b>
+ * <br><b>[id, lang, cuisine, description_title, description, treatments]</b>
  *
- * @package     Syscover\Hotels\Models
+ * @package     Syscover\Spas\Models
  */
 
 class SpaLang extends Model {
@@ -20,11 +20,11 @@ class SpaLang extends Model {
     use TraitModel;
     use Eloquence, Mappable;
 
-	protected $table        = '007_181_hotel_lang';
+	protected $table        = '014_181_spa_lang';
     protected $primaryKey   = 'id_181';
     protected $suffix       = '181';
     public $timestamps      = false;
-    protected $fillable     = ['id_181', 'lang_181', 'cuisine_181', 'special_dish_181', 'indications_181', 'interest_points_181', 'environment_description_181', 'construction_181', 'activities_181', 'description_title_181', 'description_181', 'data_181'];
+    protected $fillable     = ['id_181', 'lang_181', 'description_title_181', 'description_181', 'treatments_181'];
     protected $maps         = [];
     protected $relationMaps = [
         'lang'  => \Syscover\Pulsar\Models\Lang::class
