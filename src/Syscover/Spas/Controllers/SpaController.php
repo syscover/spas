@@ -75,11 +75,9 @@ class SpaController extends Controller {
     {
         if(isset($parameters['id']))
         {
-            $hotel = Hotel::find($parameters['id']);
+            $spa = Spa::find($parameters['id']);
 
-            $parameters['specialRules']['emailRule']    = $this->request->input('email') == $hotel->email_180? true : false;
-            $parameters['specialRules']['userRule']     = $this->request->input('user') == $hotel->user_180? true : false;
-            $parameters['specialRules']['passRule']     = $this->request->input('password') == ""? true : false;
+            $parameters['specialRules']['emailRule']    = $this->request->input('email') == $spa->email_180? true : false;
         }
 
         return $parameters;
@@ -89,8 +87,8 @@ class SpaController extends Controller {
     {
         if(!$this->request->has('id'))
         {
-            // create new hotel
-            $hotel = Hotel::create([
+            // create new spa
+            $spa = Spa::create([
                 'custom_field_group_180'                        => empty($this->request->input('customFieldGroup'))? null : $this->request->input('customFieldGroup'),
                 'name_180'                                      => $this->request->input('name'),
                 'slug_180'                                      => $this->request->input('slug'),
@@ -98,19 +96,9 @@ class SpaController extends Controller {
                 'web_url_180'                                   => $this->request->input('webUrl'),
                 'contact_180'                                   => $this->request->input('contact'),
                 'email_180'                                     => $this->request->input('email'),
-                'booking_email_180'                             => $this->request->input('bookingEmail'),
                 'phone_180'                                     => $this->request->input('phone'),
                 'mobile_180'                                    => $this->request->input('mobile'),
                 'fax_180'                                       => $this->request->input('fax'),
-                'environment_180'                               => $this->request->has('environment') ? $this->request->input('environment') : null,
-                'decoration_180'                                => $this->request->has('decoration') ? $this->request->input('decoration') : null,
-                'relationship_180'                              => $this->request->has('relationship') ? $this->request->input('relationship') : null,
-                'n_rooms_180'                                   => $this->request->input('nRooms'),
-                'n_places_180'                                  => $this->request->input('nPlaces'),
-                'n_events_rooms_180'                            => $this->request->input('nEventsRooms'),
-                'n_events_rooms_places_180'                     => $this->request->input('nEventsRoomsPlaces'),
-                'user_180'                                      => $this->request->input('user'),
-                'password_180'                                  => Hash::make($this->request->input('password')),
                 'active_180'                                    => $this->request->has('active'),
                 'country_180'                                   => $this->request->input('country'),
                 'territorial_area_1_180'                        => $this->request->has('territorialArea1') ? $this->request->input('territorialArea1') : null,
@@ -121,90 +109,37 @@ class SpaController extends Controller {
                 'address_180'                                   => $this->request->input('address'),
                 'latitude_180'                                  => str_replace(',', '', $this->request->input('latitude')),   // replace ',' character, can contain this character that damage script
                 'longitude_180'                                 => str_replace(',', '', $this->request->input('longitude')),  // replace ',' character, can contain this character that damage script
-                'booking_url_180'                               => $this->request->input('bookingUrl'),
-                'country_chef_restaurant_180'                   => $this->request->has('countryChefRestaurant'),
-                'country_chef_url_180'                          => $this->request->input('countryChefUrl'),
-                'restaurant_name_180'                           => $this->request->input('restaurantName'),
-                'restaurant_type_180'                           => $this->request->has('restaurantType')? $this->request->input('restaurantType') : null,
-                'restaurant_terrace_180'                        => $this->request->has('restaurantTerrace'),
-                'billing_name_180'                              => $this->request->input('billingName'),
-                'billing_surname_180'                           => $this->request->input('billingSurname'),
-                'billing_company_name_180'                      => $this->request->input('billingCompanyName'),
-                'billing_tin_180'                               => $this->request->input('billingTin'),
-                'billing_country_180'                           => $this->request->has('billingCountry')? $this->request->input('billingCountry') : null,
-                'billing_territorial_area_1_180'                => $this->request->has('billingTerritorialArea1')? $this->request->input('billingTerritorialArea1') : null,
-                'billing_territorial_area_2_180'                => $this->request->has('billingTerritorialArea2')? $this->request->input('billingTerritorialArea2') : null,
-                'billing_territorial_area_3_180'                => $this->request->has('billingTerritorialArea3')? $this->request->input('billingTerritorialArea3') : null,
-                'billing_cp_180'                                => $this->request->input('billingCp'),
-                'billing_locality_180'                          => $this->request->input('billingLocality'),
-                'billing_address_180'                           => $this->request->input('billingAddress'),
-                'billing_phone_180'                             => $this->request->input('billingPhone'),
-                'billing_email_180'                             => $this->request->input('billingEmail'),
-                'billing_iban_country_180'                      => $this->request->input('billingIbanCountry'),
-                'billing_iban_check_digits_180'                 => $this->request->input('billingIbanCheckDigits'),
-                'billing_iban_basic_bank_account_number_180'    => $this->request->input('billingIbanBasicBankAccountNumber'),
-                'billing_bic_180'                               => $this->request->input('billingBic')
             ]);
 
-            $id     = $hotel->id_180;
+            $id     = $spa->id_180;
             $idLang = null;
-
-            // publications
-            if(is_array($this->request->input('published')))
-                $hotel->getPublications()->sync($this->request->input('published'));
-
-            // services
-            if(is_array($this->request->input('services')))
-                $hotel->getServices()->sync($this->request->input('services'));
         }
         else
         {
-            // create hotel language
+            // create spa language
             $id     = $this->request->input('id');
             $idLang = $id;
         }
 
-        Hotel::where('id_180', $id)->update([
-            'data_lang_180'                 => Hotel::addLangDataRecord($this->request->input('lang'), $idLang)
+        Spa::where('id_180', $id)->update([
+            'data_lang_180'                 => Spa::addLangDataRecord($this->request->input('lang'), $idLang)
         ]);
 
-        HotelLang::create([
-            'id_171'                        => $id,
-            'lang_171'                      => $this->request->input('lang'),
-            'cuisine_171'                   => $this->request->input('cuisine'),
-            'special_dish_171'              => $this->request->input('specialDish'),
-            'indications_171'               => $this->request->input('indications'),
-            'interest_points_171'           => $this->request->input('interestPoints'),
-            'environment_description_171'   => $this->request->input('environmentDescription'),
-            'construction_171'              => $this->request->input('construction'),
-            'activities_171'                => $this->request->input('activities'),
-            'description_title_171'         => $this->request->input('descriptionTitle'),
-            'description_171'               => $this->request->input('description')
+        SpaLang::create([
+            'id_181'                        => $id,
+            'lang_181'                      => $this->request->input('lang'),
+            'description_title_181'         => $this->request->has('descriptionTitle')? $this->request->input('descriptionTitle') : null,
+            'description_181'               => $this->request->has('description')? $this->request->input('description') : null,
+            'treatments_181'                => $this->request->has('treatments')? $this->request->input('treatments') : null,
         ]);
-
-        // set hotel products
-        $hotelProducts = [];
-        $products = json_decode($this->request->input('products'));
-        foreach($products as $product)
-        {
-            $hotelProducts[] = [
-                'hotel_177'         => $id,
-                'product_177'       => $product,
-                'lang_177'          => $this->request->input('lang'),
-                'description_177'   => $this->request->input('d' . $product)
-            ];
-        }
-
-        if(count($hotelProducts) > 0)
-            HotelProduct::insert($hotelProducts);
 
         // set attachments
         $attachments = json_decode($this->request->input('attachments'));
-        AttachmentLibrary::storeAttachments($attachments, 'hotels', 'hotels-hotel', $id, $this->request->input('lang'));
+        AttachmentLibrary::storeAttachments($attachments, 'spas', 'spas-spa', $id, $this->request->input('lang'));
 
         // set custom fields
         if(!empty($this->request->input('customFieldGroup')))
-            CustomFieldResultLibrary::storeCustomFieldResults($this->request, $this->request->input('customFieldGroup'), 'hotels-hotel', $id, $this->request->input('lang'));
+            CustomFieldResultLibrary::storeCustomFieldResults($this->request, $this->request->input('customFieldGroup'), 'spas-spa', $id, $this->request->input('lang'));
     }
 
     public function editCustomRecord($parameters)
@@ -340,16 +275,16 @@ class SpaController extends Controller {
             $hotel->getServices()->detach();
         }
 
-        HotelLang::where('id_171', $parameters['id'])->where('lang_171', $this->request->input('lang'))->update([
-            'cuisine_171'                   => $this->request->input('cuisine'),
-            'special_dish_171'              => $this->request->input('specialDish'),
-            'indications_171'               => $this->request->input('indications'),
-            'interest_points_171'           => $this->request->input('interestPoints'),
-            'environment_description_171'   => $this->request->input('environmentDescription'),
-            'construction_171'              => $this->request->input('construction'),
-            'activities_171'                => $this->request->input('activities'),
-            'description_title_171'         => $this->request->input('descriptionTitle'),
-            'description_171'               => $this->request->input('description')
+        HotelLang::where('id_181', $parameters['id'])->where('lang_181', $this->request->input('lang'))->update([
+            'cuisine_181'                   => $this->request->input('cuisine'),
+            'special_dish_181'              => $this->request->input('specialDish'),
+            'indications_181'               => $this->request->input('indications'),
+            'interest_points_181'           => $this->request->input('interestPoints'),
+            'environment_description_181'   => $this->request->input('environmentDescription'),
+            'construction_181'              => $this->request->input('construction'),
+            'activities_181'                => $this->request->input('activities'),
+            'description_title_181'         => $this->request->input('descriptionTitle'),
+            'description_181'               => $this->request->input('description')
         ]);
 
         // set hotel products
@@ -386,7 +321,7 @@ class SpaController extends Controller {
     public function deleteCustomTranslationRecord($object)
     {
         // delete all attachments from lang object
-        AttachmentLibrary::deleteAttachment($this->package, 'hotels-hotel', $object->id_171, $object->lang_171);
+        AttachmentLibrary::deleteAttachment($this->package, 'hotels-hotel', $object->id_181, $object->lang_181);
     }
 
     public function deleteCustomRecordsSelect($ids)
