@@ -38,7 +38,7 @@
 
     <script>
         $(document).ready(function() {
-            // to hotel data
+            // to spa data
             $.getAddress({
                 id:                         '01',
                 type:                       'laravel',
@@ -93,7 +93,7 @@
                 zoom:               12,
                 showMarker:         true,
                 customIcon:         {
-                    src: '/packages/syscover/hotels/images/location.svg',
+                    src: '/packages/syscover/spas/images/location.svg',
                     scaledWidth: 49,
                     scaledHeight: 71,
                     anchorX: 25,
@@ -152,7 +152,7 @@
     </script>
 
     @include('pulsar::includes.js.custom_fields', [
-        'resource' => 'hotels-hotel'
+        'resource' => 'spas-spa'
     ])
     @include('pulsar::includes.js.delete_translation_record')
 @stop
@@ -265,7 +265,7 @@
         </div>
         <div class="col-md-6">
             @include('pulsar::includes.html.form_text_group', [
-                'label' => trans('hotels::pulsar.web_url'),
+                'label' => trans('pulsar::pulsar.web_url'),
                 'name' => 'webUrl',
                 'value' => old('webUrl', isset($object->web_url_180)? $object->web_url_180 : null),
                 'maxLength' => '100',
@@ -436,7 +436,7 @@
 
 @section('box_tab2')
     @include('pulsar::includes.html.form_text_group', [
-        'label' => trans('hotels::pulsar.description_title'),
+        'label' => trans('pulsar::pulsar.description_title'),
         'name' => 'descriptionTitle',
         'value' => old('descriptionTitle', isset($object->description_title_181)? $object->description_title_181 : null),
         'maxLength' => '100',
