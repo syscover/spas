@@ -1,5 +1,5 @@
 @extends('pulsar::layouts.tab', ['tabs' => [
-        ['id' => 'box_tab1', 'name' => trans_choice('hotels::pulsar.hotel', 1)],
+        ['id' => 'box_tab1', 'name' => trans_choice('spas::pulsar.spa', 1)],
         ['id' => 'box_tab2', 'name' => trans_choice('pulsar::pulsar.description', 2)],
         ['id' => 'box_tab3', 'name' => trans_choice('pulsar::pulsar.attachment', 2)],
     ]])
@@ -29,8 +29,8 @@
 
     <script src="{{ asset('packages/syscover/pulsar/vendor/attachment/js/attachment-library.js') }}"></script>
     @include('pulsar::includes.js.attachment', [
-        'resource'          => 'hotels-hotel',
-        'routesConfigFile'  => 'hotels',
+        'resource'          => 'spas-spa',
+        'routesConfigFile'  => 'spas',
         'objectId'          => isset($object)? $object->id_180 : null])
     @include('pulsar::includes.js.check_slug', [
         'route' => 'apiCheckSlugHotel'
@@ -165,7 +165,7 @@
 @stop
 
 @section('box_tab1')
-    <!-- hotels::hotels.create -->
+    <!-- spas::spa.form -->
     <div class="row">
         <div class="col-md-6">
             @include('pulsar::includes.html.form_text_group', [
@@ -188,6 +188,23 @@
             ])
         </div>
     </div>
+    @include('pulsar::includes.html.form_select_group', [
+        'labelSize' => 1,
+        'fieldSize' => 5,
+        'label' => trans_choice('hotels::pulsar.hotel', 1),
+        'name' => 'hotel',
+        'value' => old('hotel', isset($object->hotel_id_180)? $object->hotel_id_180 : null),
+        'objects' => $hotels,
+        'idSelect' => 'id_170',
+        'nameSelect' => 'name_170',
+        'class' => 'select2',
+        'data' => [
+            'language' => config('app.locale'),
+            'width' => '100%',
+            'error-placement' => 'select2-section-outer-container',
+            'disabled' => $action == 'update' || $action == 'store'? false : true
+        ]
+    ])
     @include('pulsar::includes.html.form_text_group', [
         'labelSize' => 1,
         'fieldSize' => 11,
@@ -292,56 +309,6 @@
     ])
     <div class="row">
         <div class="col-md-6">
-            @include('pulsar::includes.html.form_text_group', [
-                'label' => trans_choice('pulsar::pulsar.user', 1),
-                'name' => 'user',
-                'value' => old('user', isset($object->user_180)? $object->user_180 : null),
-                'maxLength' => '50',
-                'rangeLength' => '2,50',
-                'fieldSize' => 6,
-                'required' => true,
-                'readOnly' => $action == 'update' || $action == 'store'? false : true
-            ])
-            @include('pulsar::includes.html.form_text_group', [
-                'fieldSize' => 8,
-                'label' => trans('pulsar::pulsar.password'),
-                'type' => 'password',
-                'name' => 'password',
-                'value' => old('password'),
-                'maxLength' => '50',
-                'rangeLength' => '4,50',
-                'required' => $action == 'store'? true : false,
-                'readOnly' => $action == 'update' || $action == 'store'? false : true
-            ])
-            @include('pulsar::includes.html.form_text_group', [
-                'fieldSize' => 8,
-                'label' => trans('pulsar::pulsar.repeat_password'),
-                'type' => 'password' ,
-                'name' => 'repassword',
-                'value' => old('repassword'),
-                'maxLength' => '50',
-                'rangeLength' => '4,50',
-                'required' => $action == 'store'? true : false,
-                'readOnly' => $action == 'update' || $action == 'store'? false : true
-            ])
-        </div>
-        <div class="col-md-6">
-            @include('pulsar::includes.html.form_select_group', [
-                'label' => trans('hotels::pulsar.published'),
-                'name' => 'published[]',
-                'value' => old('published', isset($object)? $object->getPublications : null),
-                'objects' => $publications,
-                'idSelect' => 'id_174',
-                'nameSelect' => 'name_174',
-                'multiple' => true,
-                'class' => 'select2',
-                'data' => [
-                    'language' => config('app.locale'),
-                    'width' => '100%',
-                    'error-placement' => 'select2-section-outer-container',
-                    'disabled' => $action == 'update' || $action == 'store'? false : true
-                ]
-            ])
             @include('pulsar::includes.html.form_checkbox_group', [
                 'label' => trans('pulsar::pulsar.active'),
                 'name' => 'active',
@@ -350,223 +317,9 @@
                 'disabled' => $action == 'update' || $action == 'store'? false : true
             ])
         </div>
-    </div>
-
-    @include('pulsar::includes.html.form_section_header', [
-        'label' => trans_choice('hotels::pulsar.service', 2),
-        'icon' => 'fa fa-star'
-    ])
-    @include('pulsar::includes.html.form_dual_list_group', [
-        'name' => 'services',
-        'value' => old('countries'),
-        'objectsSelect' => isset($object)? $object->getServices->where('lang_153', $lang->id_001) : null,
-        'objects' => $services,
-        'idSelect' => 'id_153',
-        'nameSelect' => 'name_153',
-        'idList1' => 1,
-        'idList2' => 2,
-        'labelList1' => trans('hotels::pulsar.services_list'),
-        'labelList2' => trans('hotels::pulsar.selected_services'),
-        'required' => true
-    ])
-
-    @include('pulsar::includes.html.form_section_header', [
-        'label' => trans_choice('pulsar::pulsar.feature', 2),
-        'icon' => 'fa fa-bookmark'
-    ])
-    <div class="row">
         <div class="col-md-6">
-            @include('pulsar::includes.html.form_select_group', [
-                'label' => trans_choice('hotels::pulsar.environment', 1),
-                'name' => 'environment',
-                'value' => old('environment', isset($object->environment_180)? $object->environment_180 : null),
-                'objects' => $environments,
-                'idSelect' => 'id_150',
-                'nameSelect' => 'name_150',
-                'class' => 'select2',
-                'data' => [
-                    'language' => config('app.locale'),
-                    'width' => '100%',
-                    'error-placement' => 'select2-section-outer-container',
-                    'disabled' => $action == 'update' || $action == 'store'? false : true
-                ]
-            ])
-            @include('pulsar::includes.html.form_select_group', [
-                'label' => trans_choice('hotels::pulsar.decoration', 1),
-                'name' => 'decoration',
-                'value' => old('decoration', isset($object->decoration_180)? $object->decoration_180 : null),
-                'objects' => $decorations,
-                'idSelect' => 'id_151',
-                'nameSelect' => 'name_151',
-                'class' => 'select2',
-                'data' => [
-                    'language' => config('app.locale'),
-                    'width' => '100%',
-                    'error-placement' => 'select2-section-outer-container',
-                    'disabled' => $action == 'update' || $action == 'store'? false : true
-                ]
-            ])
-            @include('pulsar::includes.html.form_select_group', [
-                'label' => trans_choice('hotels::pulsar.relationship', 1),
-                'name' => 'relationship',
-                'value' => old('relationship', isset($object->relationship_180)? $object->relationship_180 : null),
-                'objects' => $relationships,
-                'idSelect' => 'id_152',
-                'nameSelect' => 'name_152',
-                'class' => 'select2',
-                'data' => [
-                    'language' => config('app.locale'),
-                    'width' => '100%',
-                    'error-placement' => 'select2-section-outer-container',
-                    'disabled' => $action == 'update' || $action == 'store'? false : true
-                ]
-            ])
-        </div>
-        <div class="col-md-6">
-            @include('pulsar::includes.html.form_text_group', [
-                'label' => trans('hotels::pulsar.number_rooms'),
-                'name' => 'nRooms',
-                'value' => old('nRooms', isset($object->n_rooms_180)? $object->n_rooms_180 : null),
-                'maxLength' => '50',
-                'rangeLength' => '1,50',
-                'readOnly' => $action == 'update' || $action == 'store'? false : true
-            ])
-            @include('pulsar::includes.html.form_text_group', [
-                'label' => trans('hotels::pulsar.number_places'),
-                'name' => 'nPlaces',
-                'value' => old('nPlaces', isset($object->n_places_180)? $object->n_places_180 : null),
-                'maxLength' => '50',
-                'rangeLength' => '1,50',
-                'readOnly' => $action == 'update' || $action == 'store'? false : true
-            ])
         </div>
     </div>
-
-    @include('pulsar::includes.html.form_section_header', [
-        'label' => trans_choice('pulsar::pulsar.company', 2),
-        'icon' => 'fa fa-building'
-    ])
-    <div class="row">
-        <div class="col-md-6">
-            @include('pulsar::includes.html.form_text_group', [
-                'label' => trans_choice('hotels::pulsar.meeting_rooms', 1),
-                'name' => 'nEventsRooms',
-                'value' => old('nEventsRooms', isset($object->n_events_rooms_180)? $object->n_events_rooms_180 : null),
-                'maxLength' => '50',
-                'rangeLength' => '1,50',
-                'readOnly' => $action == 'update' || $action == 'store'? false : true
-            ])
-        </div>
-        <div class="col-md-6">
-            @include('pulsar::includes.html.form_text_group', [
-                'label' => trans_choice('hotels::pulsar.capacity', 1),
-                'name' => 'nEventsRoomsPlaces',
-                'value' => old('nEventsRoomsPlaces', isset($object->n_events_rooms_places_180)? $object->n_events_rooms_places_180 : null),
-                'maxLength' => '50',
-                'rangeLength' => '1,50',
-                'readOnly' => $action == 'update' || $action == 'store'? false : true
-            ])
-        </div>
-    </div>
-
-    @include('pulsar::includes.html.form_section_header', [
-        'label' => trans('hotels::pulsar.restaurant'),
-        'icon' => 'fa fa-cutlery'
-    ])
-    <div class="row">
-        <div class="col-md-6">
-            @include('pulsar::includes.html.form_text_group', [
-                'label' => trans('pulsar::pulsar.name'),
-                'name' => 'restaurantName',
-                'value' => old('restaurantName', isset($object->restaurant_name_180)? $object->restaurant_name_180 : null),
-                'maxLength' => '100',
-                'rangeLength' => '2,100',
-                'readOnly' => $action == 'update' || $action == 'store'? false : true
-            ])
-            @include('pulsar::includes.html.form_text_group', [
-                'label' => trans('hotels::pulsar.cuisine'),
-                'name' => 'cuisine',
-                'value' => old('cuisine', isset($object->cuisine_171)? $object->cuisine_171 : null),
-                'maxLength' => '255',
-                'rangeLength' => '2,255'
-            ])
-            @include('pulsar::includes.html.form_text_group', [
-                'label' => trans('hotels::pulsar.special_dish'),
-                'name' => 'specialDish',
-                'value' => old('specialDish', isset($object->special_dish_171)? $object->special_dish_171 : null),
-                'maxLength' => '255',
-                'rangeLength' => '2,255'
-            ])
-            @include('pulsar::includes.html.form_checkbox_group', [
-                'label' => trans('hotels::pulsar.terrace'),
-                'name' => 'restaurantTerrace',
-                'value' => 1,
-                'checked' => old('restaurantTerrace', isset($object)? $object->restaurant_terrace_180 : null),
-                'disabled' => $action == 'update' || $action == 'store'? false : true
-            ])
-        </div>
-        <div class="col-md-6">
-            @include('pulsar::includes.html.form_checkbox_group', [
-                'label' => 'Country Chef',
-                'name' => 'countryChefRestaurant',
-                'value' => 1,
-                'checked' => old('countryChefRestaurant', isset($object)? $object->country_chef_restaurant_180 : null),
-                'disabled' => $action == 'update' || $action == 'store'? false : true
-            ])
-            @include('pulsar::includes.html.form_text_group', [
-                'label' => 'T.C.C. URL',
-                'name' => 'countryChefUrl',
-                'value' => old('countryChefUrl', isset($object->country_chef_url_180)? $object->country_chef_url_180 : null),
-                'maxLength' => '255',
-                'rangeLength' => '2,255',
-                'placeholder' => 'http://www.thecountrychef.es/',
-                'readOnly' => $action == 'update' || $action == 'store'? false : true
-            ])
-            @include('pulsar::includes.html.form_select_group', [
-                'label' => trans_choice('pulsar::pulsar.type', 1),
-                'name' => 'restaurantType',
-                'value' => old('restaurantType', isset($object->restaurant_type_180)? $object->restaurant_type_180 : null),
-                'objects' => $restaurantTypes,
-                'idSelect' => 'id',
-                'nameSelect' => 'name',
-                'class' => 'select2',
-                'data' => [
-                    'language' => config('app.locale'),
-                    'width' => '100%',
-                    'error-placement' => 'select2-section-outer-container',
-                    'minimum-results-for-search' => -1,
-                    'disabled' => $action == 'update' || $action == 'store'? false : true
-                ]
-            ])
-        </div>
-    </div>
-
-    @include('pulsar::includes.html.form_section_header', [
-        'label' => trans('hotels::pulsar.booking_data'),
-        'icon' => 'fa fa-bed'
-    ])
-    @include('pulsar::includes.html.form_text_group', [
-        'labelSize' => 1,
-        'fieldSize' => 5,
-        'label' => trans('hotels::pulsar.booking_email'),
-        'name' => 'bookingEmail',
-        'value' => old('bookingEmail', isset($object->booking_email_180)? $object->booking_email_180 : null),
-        'maxLength' => '50',
-        'rangeLength' => '2,50',
-        'type' => 'email',
-        'readOnly' => $action == 'update' || $action == 'store'? false : true
-    ])
-    @include('pulsar::includes.html.form_text_group', [
-        'labelSize' => 1,
-        'fieldSize' => 11,
-        'label' => trans('hotels::pulsar.booking_url'),
-        'name' => 'bookingUrl',
-        'value' => old('bookingUrl', isset($object->booking_url_180)? $object->booking_url_180 : null),
-        'maxLength' => '100',
-        'rangeLength' => '2,100',
-        'placeholder' => 'http://www.booking.com/',
-        'readOnly' => $action == 'update' || $action == 'store'? false : true
-    ])
 
     @include('pulsar::includes.html.form_section_header', [
         'label' => trans_choice('pulsar::pulsar.geolocation', 1),
@@ -678,50 +431,33 @@
         'containerId' => 'headerCustomFields'
     ])
     <div id="wrapperCustomFields"></div>
-    <!-- ./hotels::hotels.create -->
+    <!-- ./spas::spa.form -->
 @stop
 
 @section('box_tab2')
     @include('pulsar::includes.html.form_text_group', [
-        'label' => trans('hotels::pulsar.construction'),
-        'name' => 'construction',
-        'value' => old('construction', isset($object->construction_171)? $object->construction_171 : null),
-        'maxLength' => '255',
-        'rangeLength' => '2,255'
-    ])
-    @include('pulsar::includes.html.form_text_group', [
         'label' => trans('hotels::pulsar.description_title'),
         'name' => 'descriptionTitle',
-        'value' => old('descriptionTitle', isset($object->description_title_171)? $object->description_title_171 : null),
+        'value' => old('descriptionTitle', isset($object->description_title_181)? $object->description_title_181 : null),
         'maxLength' => '100',
         'rangeLength' => '2,100'
     ])
     @include('pulsar::includes.html.form_wysiwyg_group', [
         'label' => trans_choice('pulsar::pulsar.description', 1),
         'name' => 'description',
-        'value' => old('description', isset($object->description_171)? $object->description_171 : null)
+        'value' => old('description', isset($object->description_181)? $object->description_181 : null)
     ])
     @include('pulsar::includes.html.form_wysiwyg_group', [
-        'label' => trans('hotels::pulsar.activities'),
-        'name' => 'activities',
-        'value' => old('activities', isset($object->activities_171)? $object->activities_171 : null)
-    ])
-    @include('pulsar::includes.html.form_wysiwyg_group', [
-        'label' => trans('hotels::pulsar.indications'),
-        'name' => 'indications',
-         'value' => old('indications', isset($object->indications_171)? $object->indications_171 : null)
-    ])
-    @include('pulsar::includes.html.form_wysiwyg_group', [
-        'label' => trans('hotels::pulsar.interest_points'),
-        'name' => 'interestPoints',
-        'value' => old('interestPoints', isset($object->interest_points_171)? $object->interest_points_171 : null)
+        'label' => trans_choice('spas::pulsar.treatment', 2),
+        'name' => 'treatments',
+        'value' => old('treatments', isset($object->treatments_181)? $object->treatments_181 : null)
     ])
 @stop
 
 @section('box_tab3')
     @include('pulsar::includes.html.attachment', [
         'action'            => 'create',
-        'routesConfigFile'  => 'hotels'])
+        'routesConfigFile'  => 'spas'])
 @stop
 
 @section('endBody')
