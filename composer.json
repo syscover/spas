@@ -1,0 +1,22 @@
+{
+    "name": "syscover/spas",
+    "version": "5.2",
+    "description": "Spas package",
+    "keywords": ["syscover","pulsar","laravel","spas"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "SYSCOVER SL",
+            "email": "info@syscover.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Syscover\\Spas\\": "src/Syscover/Spas"
+        }
+    },
+    "minimum-stability": "dev"
+}
