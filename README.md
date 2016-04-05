@@ -5,7 +5,7 @@
 **1 - After install Laravel framework, insert on file composer.json, inside require object this value**
 ```
 "syscover/spas": "dev-master"
-
+```
 and execute on console:
 ```
 composer update
