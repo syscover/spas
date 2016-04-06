@@ -161,6 +161,7 @@
 @section('layoutTabHeader')
     @include('pulsar::includes.html.form_record_header')
 @stop
+
 @section('layoutTabFooter')
     @include('pulsar::includes.html.form_record_footer')
 @stop
