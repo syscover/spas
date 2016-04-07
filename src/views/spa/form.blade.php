@@ -433,7 +433,7 @@
         'containerId' => 'headerCustomFields'
     ])
     <div id="wrapperCustomFields"></div>
-    <!-- ./spas::spa.form -->
+    <!-- /.spas::spa.form -->
 @stop
 
 @section('box_tab2')
