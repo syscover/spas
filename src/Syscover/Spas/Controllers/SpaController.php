@@ -1,13 +1,12 @@
 <?php namespace Syscover\Spas\Controllers;
 
+use Syscover\Pulsar\Core\Controller;
 use Illuminate\Support\Facades\Hash;
 use Syscover\Hotels\Models\Hotel;
-use Syscover\Pulsar\Controllers\Controller;
 use Syscover\Pulsar\Libraries\AttachmentLibrary;
 use Syscover\Pulsar\Libraries\CustomFieldResultLibrary;
 use Syscover\Pulsar\Models\AttachmentFamily;
 use Syscover\Pulsar\Models\CustomFieldGroup;
-use Syscover\Pulsar\Traits\TraitController;
 use Syscover\Spas\Models\Spa;
 use Syscover\Spas\Models\SpaLang;
 
@@ -16,10 +15,8 @@ use Syscover\Spas\Models\SpaLang;
  * @package Syscover\Spas\Controllers
  */
 
-class SpaController extends Controller {
-
-    use TraitController;
-
+class SpaController extends Controller
+{
     protected $routeSuffix  = 'spa';
     protected $folder       = 'spa';
     protected $package      = 'spas';
