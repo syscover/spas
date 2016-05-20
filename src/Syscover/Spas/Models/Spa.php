@@ -25,7 +25,7 @@ class Spa extends Model
     protected $fillable     = ['id_180', 'custom_field_group_180', 'hotel_id_180', 'name_180', 'slug_180', 'web_180', 'web_url_180', 'contact_180', 'email_180', 'phone_180', 'mobile_180', 'fax_180', 'active_180', 'country_180', 'territorial_area_1_180', 'territorial_area_2_180', 'territorial_area_3_180', 'cp_180', 'locality_180', 'address_180', 'latitude_180', 'longitude_180', 'data_lang_180', 'data_180'];
     protected $maps         = [];
     protected $relationMaps = [
-        'hotel'         => \Syscover\Hotels\Models\Hotel::class,
+        'hotel'         => \Syscover\Hotels\Models\Hotel::class, // if this spa belonging to a hotel
         'lang'          => \Syscover\Pulsar\Models\Lang::class,
         'spa_lang'      => \Syscover\Spas\Models\SpaLang::class,
         'country'       => \Syscover\Pulsar\Models\Country::class
