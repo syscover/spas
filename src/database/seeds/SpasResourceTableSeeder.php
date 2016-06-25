@@ -8,8 +8,8 @@ class SpasResourceTableSeeder extends Seeder {
     public function run()
     {
         Resource::insert([
-            ['id_007' => 'spas',                'name_007' => 'Spas Package', 'package_007' => '14'],
-            ['id_007' => 'spas-spa',            'name_007' => 'Spas',         'package_007' => '14'],
+            ['id_007' => 'spas',                'name_007' => 'Spas Package', 'package_id_007' => '14'],
+            ['id_007' => 'spas-spa',            'name_007' => 'Spas',         'package_id_007' => '14'],
         ]);
     }
 }

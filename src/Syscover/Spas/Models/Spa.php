@@ -52,7 +52,7 @@ class Spa extends Model
             ->join('001_001_lang', '014_181_spa_lang.lang_181', '=', '001_001_lang.id_001')
             ->join('001_002_country', function ($join) {
                 $join->on('014_180_spa.country_180', '=', '001_002_country.id_002')
-                    ->on('001_002_country.lang_002', '=', '001_001_lang.id_001');
+                    ->on('001_002_country.lang_id_002', '=', '001_001_lang.id_001');
             })
             ->leftJoin('001_003_territorial_area_1', '014_180_spa.territorial_area_1_180', '=', '001_003_territorial_area_1.id_003')
             ->leftJoin('001_004_territorial_area_2', '014_180_spa.territorial_area_2_180', '=', '001_004_territorial_area_2.id_004');
