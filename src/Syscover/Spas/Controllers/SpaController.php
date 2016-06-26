@@ -80,7 +80,7 @@ class SpaController extends Controller
         {
             // create new spa
             $spa = Spa::create([
-                'custom_field_group_180'                        => $this->request->has('customFieldGroup')? $this->request->input('customFieldGroup') : null,
+                'field_group_id_180'                            => $this->request->has('customFieldGroup')? $this->request->input('customFieldGroup') : null,
                 'hotel_id_180'                                  => $this->request->has('hotel')? $this->request->input('hotel') : null,
                 'name_180'                                      => $this->request->input('name'),
                 'slug_180'                                      => $this->request->input('slug'),
@@ -92,10 +92,10 @@ class SpaController extends Controller
                 'mobile_180'                                    => $this->request->input('mobile'),
                 'fax_180'                                       => $this->request->input('fax'),
                 'active_180'                                    => $this->request->has('active'),
-                'country_180'                                   => $this->request->input('country'),
-                'territorial_area_1_180'                        => $this->request->has('territorialArea1') ? $this->request->input('territorialArea1') : null,
-                'territorial_area_2_180'                        => $this->request->has('territorialArea2') ? $this->request->input('territorialArea2') : null,
-                'territorial_area_3_180'                        => $this->request->has('territorialArea3') ? $this->request->input('territorialArea3') : null,
+                'country_id_180'                                => $this->request->input('country'),
+                'territorial_area_1_id_180'                     => $this->request->has('territorialArea1') ? $this->request->input('territorialArea1') : null,
+                'territorial_area_2_id_180'                     => $this->request->has('territorialArea2') ? $this->request->input('territorialArea2') : null,
+                'territorial_area_3_id_180'                     => $this->request->has('territorialArea3') ? $this->request->input('territorialArea3') : null,
                 'cp_180'                                        => $this->request->input('cp'),
                 'locality_180'                                  => $this->request->input('locality'),
                 'address_180'                                   => $this->request->input('address'),
@@ -119,7 +119,7 @@ class SpaController extends Controller
 
         SpaLang::create([
             'id_181'                        => $id,
-            'lang_181'                      => $this->request->input('lang'),
+            'lang_id_181'                   => $this->request->input('lang'),
             'description_title_181'         => $this->request->has('descriptionTitle')? $this->request->input('descriptionTitle') : null,
             'description_181'               => $this->request->has('description')? $this->request->input('description') : null,
             'treatments_181'                => $this->request->has('treatments')? $this->request->input('treatments') : null,
@@ -161,7 +161,7 @@ class SpaController extends Controller
     public function updateCustomRecord($parameters)
     {
         $spa = [
-            'custom_field_group_180'                        => $this->request->has('customFieldGroup')? $this->request->input('customFieldGroup') : null,
+            'field_group_id_180'                            => $this->request->has('customFieldGroup')? $this->request->input('customFieldGroup') : null,
             'hotel_id_180'                                  => $this->request->has('hotel')? $this->request->input('hotel') : null,
             'name_180'                                      => $this->request->input('name'),
             'slug_180'                                      => $this->request->input('slug'),
@@ -173,10 +173,10 @@ class SpaController extends Controller
             'mobile_180'                                    => $this->request->input('mobile'),
             'fax_180'                                       => $this->request->input('fax'),
             'active_180'                                    => $this->request->has('active'),
-            'country_180'                                   => $this->request->input('country'),
-            'territorial_area_1_180'                        => $this->request->has('territorialArea1') ? $this->request->input('territorialArea1') : null,
-            'territorial_area_2_180'                        => $this->request->has('territorialArea2') ? $this->request->input('territorialArea2') : null,
-            'territorial_area_3_180'                        => $this->request->has('territorialArea3') ? $this->request->input('territorialArea3') : null,
+            'country_id_180'                                => $this->request->input('country'),
+            'territorial_area_1_id_180'                     => $this->request->has('territorialArea1') ? $this->request->input('territorialArea1') : null,
+            'territorial_area_2_id_180'                     => $this->request->has('territorialArea2') ? $this->request->input('territorialArea2') : null,
+            'territorial_area_3_id_180'                     => $this->request->has('territorialArea3') ? $this->request->input('territorialArea3') : null,
             'cp_180'                                        => $this->request->input('cp'),
             'locality_180'                                  => $this->request->input('locality'),
             'address_180'                                   => $this->request->input('address'),
@@ -192,7 +192,7 @@ class SpaController extends Controller
         // haría falta el objedo actualizado
         //$spa = Spa::find($parameters['id']);
 
-        SpaLang::where('id_181', $parameters['id'])->where('lang_181', $this->request->input('lang'))->update([
+        SpaLang::where('id_181', $parameters['id'])->where('lang_id_181', $this->request->input('lang'))->update([
             'description_title_181'         => $this->request->has('descriptionTitle')? $this->request->input('descriptionTitle') : null,
             'description_181'               => $this->request->has('description')? $this->request->input('description') : null,
             'treatments_181'                => $this->request->has('treatments')? $this->request->input('treatments') : null,
@@ -215,7 +215,7 @@ class SpaController extends Controller
     public function deleteCustomTranslationRecord($object)
     {
         // delete all attachments from lang object
-        AttachmentLibrary::deleteAttachment($this->package, 'spas-spa', $object->id_181, $object->lang_181);
+        AttachmentLibrary::deleteAttachment($this->package, 'spas-spa', $object->id_181, $object->lang_id_181);
     }
 
     public function deleteCustomRecordsSelect($ids)

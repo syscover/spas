@@ -51,40 +51,11 @@
                 useSeparatorHighlight:      true,
                 textSeparatorHighlight:     '------------------',
 
-                countryValue:               '{{ old('country', isset($object->country_180)? $object->country_180 : null) }}',
-                territorialArea1Value:      '{{ old('territorialArea1', isset($object->territorial_area_1_180)? $object->territorial_area_1_180 : null) }}',
-                territorialArea2Value:      '{{ old('territorialArea2', isset($object->territorial_area_2_180)? $object->territorial_area_2_180 : null) }}',
-                territorialArea3Value:      '{{ old('territorialArea3', isset($object->territorial_area_3_180)? $object->territorial_area_3_180 : null) }}'
-            })
-
-            // to billing data
-            $.getAddress({
-                id:                         '02',
-                type:                       'laravel',
-                appName:                    'pulsar',
-                token:                      '{{ csrf_token() }}',
-                lang:                       '{{ config('app.locale') }}',
-                highlightCountrys:          ['ES','US'],
-
-                useSeparatorHighlight:      true,
-                textSeparatorHighlight:     '------------------',
-
-                tA1Wrapper:					'billingTerritorialArea1Wrapper',
-                tA2Wrapper:					'billingTerritorialArea2Wrapper',
-                tA3Wrapper:					'billingTerritorialArea3Wrapper',
-                tA1Label:                   'billingTerritorialArea1Label',
-                tA2Label:                   'billingTerritorialArea2Label',
-                tA3Label:                   'billingTerritorialArea3Label',
-                countrySelect:              'billingCountry',
-                tA1Select:                  'billingTerritorialArea1',
-                tA2Select:                  'billingTerritorialArea2',
-                tA3Select:                  'billingTerritorialArea3',
-
-                countryValue:               '{{ old('billingCountry', isset($object->billing_country_180)? $object->billing_country_180 : null) }}',
-                territorialArea1Value:      '{{ old('billingTerritorialArea1', isset($object->billing_territorial_area_1_180)? $object->billing_territorial_area_1_180 : null) }}',
-                territorialArea2Value:      '{{ old('billingTerritorialArea2', isset($object->billing_territorial_area_2_180)? $object->billing_territorial_area_2_180 : null) }}',
-                territorialArea3Value:      '{{ old('billingTerritorialArea3', isset($object->billing_territorial_area_3_180)? $object->billing_territorial_area_3_180 : null) }}'
-            })
+                countryValue:               '{{ old('country', isset($object->country_id_180)? $object->country_id_180 : null) }}',
+                territorialArea1Value:      '{{ old('territorialArea1', isset($object->territorial_area_1_id_180)? $object->territorial_area_1_id_180 : null) }}',
+                territorialArea2Value:      '{{ old('territorialArea2', isset($object->territorial_area_2_id_180)? $object->territorial_area_2_id_180 : null) }}',
+                territorialArea3Value:      '{{ old('territorialArea3', isset($object->territorial_area_3_id_180)? $object->territorial_area_3_id_180 : null) }}'
+            });
 
             $.mapPoint({
                 id:                 '01',
@@ -100,7 +71,7 @@
                     anchorX: 25,
                     anchorY: 71
                 }
-            })
+            });
 
             $('.wysiwyg').froalaEditor({
                 language: '{{ config('app.locale') }}',
@@ -113,42 +84,42 @@
                 heightMin: 130,
                 enter: $.FroalaEditor.ENTER_BR,
                 key: '{{ config('pulsar.froalaEditorKey') }}'
-            })
+            });
 
             // custom Dual multi select
             $.configureBoxes({
                 textShowing: '{{ trans('pulsar::pulsar.showing') }}',
                 textOf: '{{ trans('pulsar::pulsar.of') }}'
-            })
+            });
 
             // launch slug function when change name and slug
             $("[name=name], [name=slug]").on('change', function(){
                 $("[name=slug]").val(getSlug($(this).val(),{
                     separator: '-',
                     lang: '{{ $lang->id_001 }}'
-                }))
-                $.checkSlug()
-            })
+                }));
+                $.checkSlug();
+            });
 
             // save id product to save it after
             $(".product-toggle").on('change', function() {
-                var products = JSON.parse($('[name=products]').val())
+                var products = JSON.parse($('[name=products]').val());
                 if($(this).is(':checked'))
                 {
-                    products.push($(this).val())
+                    products.push($(this).val());
                 }
                 else
                 {
-                    var i = products.indexOf($(this).val())
+                    var i = products.indexOf($(this).val());
                     if(i != -1)
-                        products.splice(i, 1)
+                        products.splice(i, 1);
                 }
-                $('[name=products]').val(JSON.stringify(products))
-            })
+                $('[name=products]').val(JSON.stringify(products));
+            });
 
             // set tab active
             @if(isset($tab))
-                $('.tabbable li:eq({{ $tab }}) a').tab('show')
+                $('.tabbable li:eq({{ $tab }}) a').tab('show');
             @endif
         })
     </script>
@@ -298,7 +269,7 @@
                 'fieldSize' => 7,
                 'label' => trans_choice('pulsar::pulsar.field_group', 1),
                 'name' => 'customFieldGroup',
-                'value' => old('customFieldGroup', isset($object->custom_field_group_180)? $object->custom_field_group_180 : null),
+                'value' => old('customFieldGroup', isset($object->field_group_id_180)? $object->field_group_id_180 : null),
                 'objects' => $customFieldGroups,
                 'idSelect' => 'id_025',
                 'nameSelect' => 'name_025'

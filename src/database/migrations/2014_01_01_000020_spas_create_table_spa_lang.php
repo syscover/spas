@@ -18,19 +18,17 @@ class SpasCreateTableSpaLang extends Migration {
 				$table->engine = 'InnoDB';
 
 				$table->integer('id_181')->unsigned();
-				$table->string('lang_181', 2);
-
+				$table->string('lang_id_181', 2);
 				$table->string('description_title_181')->nullable();
 				$table->text('description_181')->nullable();
 				$table->text('treatments_181')->nullable();
-
-				$table->primary(['id_181', 'lang_181'], 'pk01_014_181_spa_lang');
-
+				
 				$table->foreign('id_181', 'fk01_014_181_spa_lang')->references('id_180')->on('014_180_spa')
 					->onDelete('cascade')->onUpdate('cascade');
-				$table->foreign('lang_181', 'fk02_014_181_spa_lang')->references('id_001')->on('001_001_lang')
+				$table->foreign('lang_id_181', 'fk02_014_181_spa_lang')->references('id_001')->on('001_001_lang')
 					->onDelete('restrict')->onUpdate('cascade');
 
+				$table->primary(['id_181', 'lang_id_181'], 'pk01_014_181_spa_lang');
 			});
 		}
 	}
