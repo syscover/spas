@@ -45,7 +45,7 @@ class SpaController extends Controller
 
     public function createCustomRecord($parameters)
     {
-        $parameters['attachmentFamilies']   = AttachmentFamily::getAttachmentFamilies(['resource_015' => 'spas-spa']);
+        $parameters['attachmentFamilies']   = AttachmentFamily::getAttachmentFamilies(['resource_id_015' => 'spas-spa']);
         $parameters['customFieldGroups']    = CustomFieldGroup::where('resource_025', 'spas-spa')->get();
         $parameters['attachmentsInput']     = json_encode([]);
         $parameters['hotels']               = Hotel::builder()->where('active_170', true)->get();
@@ -140,7 +140,7 @@ class SpaController extends Controller
         $attachments = AttachmentLibrary::getRecords('spas', 'spas-spa', $parameters['object']->id_180, $parameters['lang']->id_001);
 
         // merge parameters and attachments array
-        $parameters['attachmentFamilies']   = AttachmentFamily::getAttachmentFamilies(['resource_015' => 'spas-spa']);
+        $parameters['attachmentFamilies']   = AttachmentFamily::getAttachmentFamilies(['resource_id_015' => 'spas-spa']);
         $parameters['customFieldGroups']    = CustomFieldGroup::builder()->where('resource_025', 'spas-spa')->get();
         $parameters['hotels']               = Hotel::builder()->where('active_170', true)->get();
 
