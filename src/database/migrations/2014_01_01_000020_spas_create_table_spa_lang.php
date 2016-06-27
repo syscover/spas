@@ -23,10 +23,16 @@ class SpasCreateTableSpaLang extends Migration {
 				$table->text('description_181')->nullable();
 				$table->text('treatments_181')->nullable();
 				
-				$table->foreign('id_181', 'fk01_014_181_spa_lang')->references('id_180')->on('014_180_spa')
-					->onDelete('cascade')->onUpdate('cascade');
-				$table->foreign('lang_id_181', 'fk02_014_181_spa_lang')->references('id_001')->on('001_001_lang')
-					->onDelete('restrict')->onUpdate('cascade');
+				$table->foreign('id_181', 'fk01_014_181_spa_lang')
+					->references('id_180')
+					->on('014_180_spa')
+					->onDelete('cascade')
+					->onUpdate('cascade');
+				$table->foreign('lang_id_181', 'fk02_014_181_spa_lang')
+					->references('id_001')
+					->on('001_001_lang')
+					->onDelete('restrict')
+					->onUpdate('cascade');
 
 				$table->primary(['id_181', 'lang_id_181'], 'pk01_014_181_spa_lang');
 			});
