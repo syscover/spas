@@ -20,7 +20,7 @@ class SpaController extends Controller
     protected $routeSuffix  = 'spa';
     protected $folder       = 'spa';
     protected $package      = 'spas';
-    protected $indexColumns     = ['id_180', 'name_001', 'name_002', 'name_003', 'name_180', ['data' => 'active_180', 'type' => 'active']];
+    protected $indexColumns = ['id_180', 'name_001', 'name_002', 'name_003', 'name_180', ['data' => 'active_180', 'type' => 'active']];
     protected $nameM        = 'name_180';
     protected $model        = Spa::class;
     protected $langModel    = SpaLang::class;
