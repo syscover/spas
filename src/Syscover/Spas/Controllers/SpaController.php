@@ -68,7 +68,7 @@ class SpaController extends Controller
         {
             $spa = Spa::find($parameters['id']);
 
-            $parameters['specialRules']['emailRule']    = $this->request->input('email') == $spa->email_180? true : false;
+            $parameters['specialRules']['emailRule'] = $this->request->input('email') == $spa->email_180? true : false;
         }
 
         return $parameters;
