@@ -1,9 +1,7 @@
 {
     "name": "syscover/spas",
-    "version": "5.2",
     "description": "Spas package",
     "keywords": ["syscover","pulsar","laravel","spas"],
-    "license": "MIT",
     "authors": [
         {
             "name": "SYSCOVER SL",
