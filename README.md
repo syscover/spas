@@ -1,4 +1,4 @@
-# Spas for Laravel 5.2
+# Spas for Laravel 5.3
 
 [![Total Downloads](https://poser.pugx.org/syscover/spas/downloads)](https://packagist.org/packages/syscover/spas)
 
@@ -6,7 +6,7 @@
 
 **1 - After install Laravel framework, insert on file composer.json, inside require object this value**
 ```
-"syscover/spas": "~1.0"
+"syscover/spas": "~2.0"
 ```
 and execute on console:
 ```
