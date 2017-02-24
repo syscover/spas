@@ -296,6 +296,32 @@
     </div>
 
     @include('pulsar::includes.html.form_section_header', [
+        'label' => trans('spas::pulsar.booking_header'),
+        'icon' => 'fa fa fa-book'
+    ])
+    @include('pulsar::includes.html.form_text_group', [
+        'labelSize' => 1,
+        'fieldSize' => 5,
+        'label' => trans('spas::pulsar.booking_email'),
+        'name' => 'bookingEmail',
+        'value' => old('bookingEmail', isset($object->booking_email_180)? $object->booking_email_180 : null),
+        'maxLength' => '50',
+        'rangeLength' => '2,50',
+        'type' => 'email',
+        'readOnly' => $action == 'update' || $action == 'store'? false : true
+    ])
+    @include('pulsar::includes.html.form_text_group', [
+        'labelSize' => 1,
+        'fieldSize' => 11,
+        'label' => trans('spas::pulsar.booking_data'),
+        'name' => 'bookingData',
+        'value' => old('bookingData', isset($object->booking_data_180)? $object->booking_data_180 : null),
+        'maxLength' => '100',
+        'rangeLength' => '2,100',
+        'readOnly' => $action == 'update' || $action == 'store'? false : true
+    ])
+
+    @include('pulsar::includes.html.form_section_header', [
         'label' => trans_choice('pulsar::pulsar.geolocation', 1),
         'icon' => 'fa fa-map-signs'
     ])

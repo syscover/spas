@@ -101,6 +101,8 @@ class SpaController extends Controller
                 'address_180'                                   => $this->request->input('address'),
                 'latitude_180'                                  => str_replace(',', '', $this->request->input('latitude')),   // replace ',' character, can contain this character that damage script
                 'longitude_180'                                 => str_replace(',', '', $this->request->input('longitude')),  // replace ',' character, can contain this character that damage script
+                'booking_data_180'                              => $this->request->input('bookingData'),
+                'booking_email_180'                             => $this->request->input('bookingEmail'),
             ]);
 
             $id     = $spa->id_180;
@@ -182,6 +184,8 @@ class SpaController extends Controller
             'address_180'                                   => $this->request->input('address'),
             'latitude_180'                                  => str_replace(',', '', $this->request->input('latitude')),   // replace ',' character, can contain this character that damage script
             'longitude_180'                                 => str_replace(',', '', $this->request->input('longitude')),  // replace ',' character, can contain this character that damage script)
+            'booking_data_180'                              => $this->request->input('bookingData'),
+            'booking_email_180'                             => $this->request->input('bookingEmail'),
         ];
 
         if($parameters['specialRules']['emailRule'])  $hotel['email_180']       = $this->request->input('email');

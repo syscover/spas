@@ -49,6 +49,12 @@ class SpasCreateTableSpa extends Migration {
                 $table->string('address_180')->nullable();
                 $table->string('latitude_180')->nullable();
                 $table->string('longitude_180')->nullable();
+
+                // booking data
+                $table->string('booking_data_180')->nullable();
+                $table->string('booking_email_180')->nullable();
+
+                // data
                 $table->string('data_lang_180')->nullable();
                 $table->text('data_180')->nullable();
                 
