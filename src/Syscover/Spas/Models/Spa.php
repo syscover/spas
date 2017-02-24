@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
  * Class Spa
  *
  * Model with properties
- * <br><b>[id, field_group_id, hotel_id, name, slug, web, web_url, contact, email, phone, mobile, fax, active, country_id, territorial_area_1_id, territorial_area_2_id, territorial_area_3_id, cp, locality, address, latitude, longitude, data_lang, data]</b>
+ * <br><b>[id, field_group_id, hotel_id, name, slug, web, web_url, contact, email, phone, mobile, fax, active, country_id, territorial_area_1_id, territorial_area_2_id, territorial_area_3_id, cp, locality, address, latitude, longitude, booking_data, booking_email, data_lang, data]</b>
  *
  * @package     Syscover\Spas\Models
  */
@@ -22,7 +22,7 @@ class Spa extends Model
     protected $primaryKey   = 'id_180';
     protected $suffix       = '180';
     public $timestamps      = false;
-    protected $fillable     = ['id_180', 'field_group_id_180', 'hotel_id_180', 'name_180', 'slug_180', 'web_180', 'web_url_180', 'contact_180', 'email_180', 'phone_180', 'mobile_180', 'fax_180', 'active_180', 'country_id_180', 'territorial_area_1_id_180', 'territorial_area_2_id_180', 'territorial_area_3_id_180', 'cp_180', 'locality_180', 'address_180', 'latitude_180', 'longitude_180', 'data_lang_180', 'data_180'];
+    protected $fillable     = ['id_180', 'field_group_id_180', 'hotel_id_180', 'name_180', 'slug_180', 'web_180', 'web_url_180', 'contact_180', 'email_180', 'phone_180', 'mobile_180', 'fax_180', 'active_180', 'country_id_180', 'territorial_area_1_id_180', 'territorial_area_2_id_180', 'territorial_area_3_id_180', 'cp_180', 'locality_180', 'address_180', 'latitude_180', 'longitude_180', 'booking_data_180', 'booking_email_180', 'data_lang_180', 'data_180'];
     protected $maps         = [];
     protected $relationMaps = [
         'hotel'         => \Syscover\Hotels\Models\Hotel::class, // if this spa belonging to a hotel
