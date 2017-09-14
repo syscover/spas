@@ -32,7 +32,7 @@ class Spa extends Model
     ];
     private static $rules   = [
         'name'      => 'required|between:2,100',
-        'email'     => 'required|between:2,50|email|unique:014_180_spa,email_180',
+        'email'     => 'required|between:2,50|email|mysql2.unique:014_180_spa,email_180',
     ];
 
     public static function validate($data, $specialRules = [])
