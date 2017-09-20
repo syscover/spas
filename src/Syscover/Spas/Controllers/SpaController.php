@@ -29,7 +29,7 @@ class SpaController extends Controller
 
     public function customIndex($parameters)
     {
-        $parameters['urlParameters']['lang']    = base_lang()->id_001;
+        $parameters['urlParameters']['lang']    = base_lang2()->id_001;
         // init record on tap 4
         $parameters['urlParameters']['tab']     = 2;
 
@@ -53,7 +53,7 @@ class SpaController extends Controller
         if(isset($parameters['id']))
         {
             // get attachments from base lang
-            $attachments = AttachmentLibrary::getRecords($this->package, 'spas-spa', $parameters['id'], base_lang()->id_001, true);
+            $attachments = AttachmentLibrary::getRecords($this->package, 'spas-spa', $parameters['id'], base_lang2()->id_001, true);
 
             // merge parameters and attachments array
             $parameters  = array_merge($parameters, $attachments);
