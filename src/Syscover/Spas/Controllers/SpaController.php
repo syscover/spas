@@ -76,7 +76,7 @@ class SpaController extends Controller
 
     public function storeCustomRecord($parameters)
     {
-        if(!$this->request->has('id'))
+        if(! $this->request->input('id'))
         {
             // create new spa
             $spa = Spa::create([
